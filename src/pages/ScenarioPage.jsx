@@ -176,7 +176,7 @@ import { useLocation } from 'react-router-dom';
       {/* Callout Section */}
 
       {tip?(<div className="max-w-7xl mx-auto px-6 mt-6">
-        <div className={`${passed? 'bg-[#847917]' : 'bg-[#fff9c4]'} rounded-lg p-4 flex justify-between items-center`}>
+        <div className={`${passed? 'bg-[#3ceb2f]' : 'bg-[#fff9c4]'} rounded-lg p-4 flex justify-between items-center`}>
           <span>{tip}</span>
           <button className="text-xl font-bold" onClick={()=>{setTip(null)}}>×</button>
         </div>
