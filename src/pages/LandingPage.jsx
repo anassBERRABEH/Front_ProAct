@@ -26,7 +26,8 @@ const LandingPage = () => {
         <div className="max-w-6xl mx-auto flex flex-wrap items-center">
           <div className="flex-1 min-w-[300px]">
             <div className="flex items-center text-2xl font-bold mb-5">
-              <img src={Logo} alt="ProAct Logo" className="h-10 mr-2" />
+              <img src={Logo} alt="ProAct Logo" className="h-10 mr-2"
+              onClick={()=>{navigate('/');}} />
               <span>ProAct</span>
             </div>
             <h1 className="text-4xl font-semibold mb-5 leading-tight">
@@ -113,7 +114,8 @@ const LandingPage = () => {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center text-2xl font-bold mb-5">
-              <img src={Logo} alt="ProAct Logo" className="h-10 mr-2" />
+              <img src={Logo} alt="ProAct Logo" className="h-10 mr-2" 
+              onClick={()=>{navigate('/');}} />
               <span>ProAct</span>
             </div>
             <p className="mb-4">Discover innovative tools and personalized learning experiences designed to revolutionize entrepreneurship education.</p>

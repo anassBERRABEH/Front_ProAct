@@ -72,7 +72,8 @@ const App = () => {
     <div className="flex flex-wrap justify-between items-start">
       {/* Logo */}
       <div className="flex items-center mb-5">
-        <img src={Logo} alt="ProAct Logo" className="h-10 mr-2" />
+        <img src={Logo} alt="ProAct Logo" className="h-10 mr-2"
+        onClick={()=>{navigate('/');}} />
         <span className="text-white text-2xl font-bold">ProAct</span>
       </div>
 
@@ -196,7 +197,8 @@ const App = () => {
           {/* ProAct Info */}
           <div>
             <div className="flex items-center justify-center mb-4">
-              <img src={Logo} alt="ProAct Logo" className="h-8 mr-2" />
+              <img src={Logo} alt="ProAct Logo" className="h-8 mr-2"
+              onClick={()=>{navigate('/');}} />
               <span className="text-xl font-bold">ProAct</span>
             </div>
             <p className="mb-4">

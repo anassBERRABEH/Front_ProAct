@@ -5,6 +5,8 @@ import { IoMdExit } from "react-icons/io";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { AiOutlineLoading } from "react-icons/ai";
+import '../css/LoadingSpinner.css';
 import {
   saveUserToLocalStorage,
   deleteUserFromLocalStorage,
@@ -17,6 +19,7 @@ import { useLocation } from 'react-router-dom';
 
   const ScenarioPage = () => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
     const { level } = location.state || {};
@@ -45,7 +48,7 @@ import { useLocation } from 'react-router-dom';
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
-    
+    setLoading(true);
 
     try {
       const dataLevel = {
@@ -63,6 +66,7 @@ import { useLocation } from 'react-router-dom';
       if ( !chat_data.true)
       {
           setTip(chat_data.tip);
+          setLoading(false);
       }
       else
       {
@@ -93,10 +97,12 @@ import { useLocation } from 'react-router-dom';
       {/* Header Section */}
       <header className="bg-[#0b77ed] text-white rounded-b-3xl px-6 py-10 relative">
         <div className="max-w-7xl mx-auto">
+
           {/* Logo Section */}
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center">
-              <img src={Logo} alt="ProAct Logo" className="h-10 mr-2" />
+              <img src={Logo} alt="ProAct Logo" className="h-10 mr-2"
+              onClick={()=>{navigate('/');}} />
               <span className="text-2xl font-bold">ProAct</span>
             </div>
             <button className="p-2 rounded-full hover:bg-[#0a6bcc]"
@@ -161,7 +167,7 @@ import { useLocation } from 'react-router-dom';
               onChange={handleChange}
             />
             {passed?"": (<button onClick={handleSubmit} className="w-full bg-[#0b77ed] text-white px-8 py-3 rounded-full hover:bg-blue-600">
-              Submit
+              {loading?<AiOutlineLoading className="loading-icon" />:"Submit"}
             </button>)}
           </div>
         </div>
@@ -182,7 +188,8 @@ import { useLocation } from 'react-router-dom';
           {/* ProAct Info */}
           <div>
             <div className="flex items-center justify-center mb-4">
-              <img src={Logo} alt="ProAct Logo" className="h-8 mr-2" />
+              <img src={Logo} alt="ProAct Logo" className="h-8 mr-2" 
+              onClick={()=>{navigate('/');}}/>
               <span className="text-xl font-bold">ProAct</span>
             </div>
             <p className="mb-4">

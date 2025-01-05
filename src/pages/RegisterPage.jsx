@@ -80,6 +80,7 @@ const RegisterPage = () => {
   
       console.log(response.data);
       setSuccess(true); // Set success state if registration is successful
+      navigate('/login');
     } catch (err) {
       setError(err.response?.data?.error || "Registration failed"); // Handle errors
     }
@@ -107,7 +108,8 @@ const RegisterPage = () => {
 
         <div className="container mx-auto flex flex-col lg:flex-row items-start p-5 relative z-10">
           <div className="w-full lg:w-1/2 flex justify-center items-center p-4">
-            <img src={LaptopImage} alt="3D Illustration" className="w-[350px] max-w-[90%]" />
+            <img src={LaptopImage} alt="3D Illustration" className="w-[350px] max-w-[100%]"
+            style={{"transform": "translateX(-40%) translateY(40%)"}} />
           </div>
 
           <div className="w-full lg:w-1/2 p-4">

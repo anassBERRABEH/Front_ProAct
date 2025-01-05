@@ -1,0 +1,15 @@
+  .loading-icon {
+    animation: spin 1s linear infinite; /* Spin animation */
+    text-align: center;
+    width: 100%;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg); /* Start position */
+    }
+    to {
+      transform: rotate(360deg); /* End position (full rotation) */
+    }
+  }
+  
