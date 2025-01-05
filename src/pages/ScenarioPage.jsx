@@ -1,9 +1,82 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../images/logo.png";
 import Confused from "../images/confused.png";
 import { IoMdExit } from "react-icons/io";
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
-const ScenarioPage = () => {
+
+  const ScenarioPage = ({ level }) => {
+
+
+ let user = {
+  id : 1,
+  level: 1,
+  //to do
+ }
+
+  
+  let data = level.problem.split("\n");
+  const [tip, setTip] = useState(null);
+  const [answer, setAnswer] = useState("");
+  const [passed, setPassed] = useState(false);
+
+  useEffect(()=>{
+    //to do
+  }, []);
+
+
+  const handleChange = (e) => {
+    setAnswer(e.target.value);
+  };
+
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    
+
+    try {
+      const dataLevel = {
+        level_id: level.id,
+        answer: answer
+      };
+      const response = await axios.post("http://127.0.0.1:5000/submit_level", dataLevel, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const chat_data = response.data;
+
+      if ( !chat_data.true)
+      {
+          setTip(chat_data.tip);
+      }
+      else
+      {
+        if(user.level <= level.id )
+        { 
+          const response = await axios.post(`http://127.0.0.1:5000//user/${user.id}/increment-level`, dataLevel, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+      }
+
+        setPassed(true);
+        setTip("You have sucssefully passed the level, keep grinding");
+  
+      }
+
+     
+    } catch (err) {
+      console.log("error");
+      
+    }
+  };
+  
   return (
     <div className="min-h-screen bg-[#E9EEF5]">
       {/* Header Section */}
@@ -23,37 +96,30 @@ const ScenarioPage = () => {
           {/* Main Content */}
           <div className="text-center">
             <h2 className="text-3xl font-semibold mb-6">
-              Not Deciding is Still a Decision
+            {level.title}
             </h2>
             <div className="max-w-3xl mx-auto text-black bg-white rounded-lg p-6 shadow-lg">
-              <p className="mb-4">
+                 
+
+
+            <p className="mb-4">
                 <strong>Situation:</strong>
                 <br />
-                You’ve just launched your startup and things are going well.
-                However, to scale up quickly, you need more funding. An investor
-                has approached you with an offer. They propose a large sum of
-                money, but they want a significant share of your company in
-                return. You’ve heard stories of entrepreneurs who regretted
-                giving up too much control, but the investment could propel your
-                startup to the next level.
+                {data[2]}
               </p>
               <p className="mb-4">
                 <strong>Challenge:</strong>
                 <br />
-                You can either accept the offer and give away a portion of your
-                business, or delay the decision in hopes of finding a better
-                offer. But delaying means you risk losing the investor's
-                interest, and your startup might not grow as fast without the
-                funding.
+                {data[5]}
               </p>
               <p className="mb-6">
                 <strong>Text Box for Answer:</strong>
                 <br />
-                What would you do in this situation? Would you take the
-                investment and give away part of your company, or would you wait
-                for a better opportunity? How do you evaluate the long-term
-                impact of waiting versus acting quickly?
+                {data[8]}
               </p>
+
+            
+
             </div>
 
             {/* Illustration */}
@@ -75,21 +141,24 @@ const ScenarioPage = () => {
             <textarea
               className="w-full h-32 border border-gray-300 rounded-lg p-4 mb-4"
               placeholder="Write your answer here ....."
+              value={answer}
+              onChange={handleChange}
             />
-            <button className="w-full bg-[#0b77ed] text-white px-8 py-3 rounded-full hover:bg-blue-600">
+            {passed?"": (<button onClick={handleSubmit} className="w-full bg-[#0b77ed] text-white px-8 py-3 rounded-full hover:bg-blue-600">
               Submit
-            </button>
+            </button>)}
           </div>
         </div>
       </section>
 
       {/* Callout Section */}
-      <div className="max-w-7xl mx-auto px-6 mt-6">
-        <div className="bg-[#fff9c4] rounded-lg p-4 flex justify-between items-center">
-          <span>Callout text</span>
-          <button className="text-xl font-bold">×</button>
+
+      {tip?(<div className="max-w-7xl mx-auto px-6 mt-6">
+        <div className={`${passed? 'bg-[#847917]' : 'bg-[#fff9c4]'} rounded-lg p-4 flex justify-between items-center`}>
+          <span>{tip}</span>
+          <button className="text-xl font-bold" onClick={()=>{setTip(null)}}>×</button>
         </div>
-      </div>
+      </div>):""}
 
       {/* Footer Section */}
       <footer className="bg-[#0b77ed] mt-12 rounded-t-3xl text-white px-6 py-10">

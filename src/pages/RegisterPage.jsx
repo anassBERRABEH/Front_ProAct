@@ -4,7 +4,7 @@ import LaptopImage from '../images/Other 07reg.png';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
-    fullname: '',
+    name: '',
     username: '',
     email: '',
     password: '',
@@ -38,27 +38,39 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-
-    console.log(formData);
-
-    // try {
-    //   const response = await axios.post(
-    //     '/api/users/register',
-    //     { ...formData }, // JSON object sent directly
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       }
-    //     }
-    //   );
-
-    //   console.log(response.data);
-    //   setSuccess(true);
-    // } catch (err) {
-    //   setError(err.response?.data?.message || 'Registration failed');
-    // }
+    setError("");
+    setSuccess(false);
+  
+    try {
+      // Construct a new object with only the required fields
+      const dataToSend = {
+        name: formData.name, // Map `fullname` to `name`
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+        gender: formData.gender,
+        major: formData.major,
+      };
+  
+      // Send the request to the backend
+      const response = await axios.post(
+        "http://127.0.0.1:5000/register",
+        dataToSend,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      console.log(response.data);
+      setSuccess(true); // Set success state if registration is successful
+    } catch (err) {
+      setError(err.response?.data?.error || "Registration failed"); // Handle errors
+    }
   };
+  
+
 
   const interests = [
     'Marketing',
@@ -94,8 +106,8 @@ const RegisterPage = () => {
                 <label className="block text-gray-700 mb-2">Full name:</label>
                 <input
                   type="text"
-                  name="fullname"
-                  value={formData.fullname}
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   className="w-full px-4 py-2 rounded-full border border-[#9dd2ff]"
                   placeholder="John Doe"

@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import axios from 'axios';
 import portfeuille from '../images/Other 03.png';
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+
+
+
+
 
 const LoginPage = () => {
   const [credentials, setCredentials] = useState({
@@ -8,6 +13,13 @@ const LoginPage = () => {
     password: ''
   });
   const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleRegisterClick = () => {
+    navigate("/register");
+  };
+  
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     setCredentials({
@@ -16,12 +28,30 @@ const LoginPage = () => {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    setError("");
+    setSuccess(false);
+
     try {
-      const response = await axios.post('/api/users/login', credentials);
-      // Handle successful login (e.g., store token, redirect)
+      // Make the login request to your backend
+      const response = await axios.post("http://127.0.0.1:5000/login", credentials, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log(response.data); // Handle the successful response
+      setSuccess(true); // Indicate success
+
+      if (response.data.valid) {
+        navigate("/road"); // Redirect to "/road"
+      } else {
+        setError("Invalid login credentials.");
+      }
     } catch (err) {
-      setError('Invalid credentials');
+      // Set error based on the response from the backend
+      setError(err.response?.data?.error || "Login failed. Please try again.");
     }
   };
 
@@ -59,11 +89,11 @@ const LoginPage = () => {
           </button>
 
           <p className="text-center text-sm mt-4">
-            Don't have an account?{' '}
-            <a href="#" className="text-[#3AA5DC] hover:underline">
-              Register
-            </a>
-          </p>
+      Don't have an account?{' '}
+      <a onClick={handleRegisterClick} className="text-[#3AA5DC] hover:underline" style={{ cursor: 'pointer' }}>
+        Register
+      </a>
+    </p>
         </div>
       </div>
 

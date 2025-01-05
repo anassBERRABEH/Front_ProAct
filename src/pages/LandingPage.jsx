@@ -37,7 +37,8 @@ const LandingPage = () => {
               </button>
             </div>
           </div>
-          <div className="flex-1 min-w-[300px] flex justify-end mt-8 lg:mt-0">
+          <div className="flex-1 min-w-[300px] flex justify-end mt-8 lg:mt-0"
+          style={{"width": "30%", "transform": "translateY(21%)"}}>
             <img 
               src={PersonLaptop} 
               alt="Person holding a laptop" 

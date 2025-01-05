@@ -37,8 +37,9 @@ const App = () => {
       </div>
 
       {/* Hero Image */}
-      <div className="md:flex-none md:w-72 mt-8 md:mt-0">
-        <img src={HeroPerson} alt="Man with Laptop" className="w-full" />
+      <div className="md:flex-none md:w-72 mt-8 md:mt-0" 
+      style={{"width": "30%", "transform": "translateY(20%)"}}>
+        <img src={HeroPerson} alt="Man with Laptop" className="w-full"/>
       </div>
     </div>
   </div>
@@ -58,61 +59,61 @@ const App = () => {
     <div className="absolute top-0 left-0 w-full h-full">
       <div
         className="absolute bg-white p-2 text-sm rounded shadow-md z-10"
-        style={{ top: "4%", left: "3%" }}
+        style={{ top: "14%", left: "20%", cursor : "pointer" }}
       >
         The Deep Dive, The Big Up
       </div>
       <div
         className="absolute bg-white p-2 text-sm rounded shadow-md z-10"
-        style={{ top: "3%", left: "65%" }}
+        style={{ top: "8%", left: "50%" , cursor : "pointer"}}
       >
         Every End is a Start
       </div>
       <div
         className="absolute bg-white p-2 text-sm rounded shadow-md z-10"
-        style={{ top: "16%", left: "23%" }}
+        style={{top: "30%", left: "15%", cursor : "pointer" }}
       >
         The Grand Launch: Your Moment to Shine
       </div>
       <div
         className="absolute bg-white p-2 text-sm rounded shadow-md z-10"
-        style={{ top: "28%", left: "73%" }}
+        style={{ top: "25%", left: "58%", cursor : "pointer" }}
       >
         Money Monie Moo
       </div>
       <div
         className="absolute bg-white p-2 text-sm rounded shadow-md z-10"
-        style={{ top: "38%", left: "48%" }}
+        style={{ top: "38%", left: "66%", cursor : "pointer" }}
       >
         Deliver the Perfect Pitch
       </div>
       <div
         className="absolute bg-white p-2 text-sm rounded shadow-md z-10"
-        style={{ top: "48%", left: "12%" }}
+        style={{ top: "55%", left: "10%", cursor : "pointer" }}
       >
         Not Deciding is Still a Decision
       </div>
       <div
         className="absolute bg-white p-2 text-sm rounded shadow-md z-10"
-        style={{ top: "58%", left: "70%" }}
+        style={{ top: "58%", left: "70%", cursor : "pointer" }}
       >
         Teamwork Makes the Dream Work
       </div>
       <div
         className="absolute bg-white p-2 text-sm rounded shadow-md z-10"
-        style={{ top: "67%", left: "35%" }}
+        style={{ top: "66%", left: "26%", cursor : "pointer" }}
       >
         All About Timing
       </div>
       <div
         className="absolute bg-white p-2 text-sm rounded shadow-md z-10"
-        style={{ top: "75%", left: "10%" }}
+        style={{ top: "89%", left: "30%", cursor : "pointer" }}
       >
         Face the Real Challenge
       </div>
       <div
         className="absolute bg-white p-2 text-sm rounded shadow-md z-10"
-        style={{ top: "85%", left: "68%" }}
+        style={{ top: "80%", left: "72%", cursor : "pointer" }}
       >
         Your First Day as an Entrepreneur
       </div>
