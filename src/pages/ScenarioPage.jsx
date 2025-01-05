@@ -4,26 +4,36 @@ import Confused from "../images/confused.png";
 import { IoMdExit } from "react-icons/io";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import {
+  saveUserToLocalStorage,
+  deleteUserFromLocalStorage,
+  getUserFromLocalStorage,
+  doesUserExistInLocalStorage,
+  updateUserInLocalStorage,
+} from '../utils/localStorageUtils';
+import { useLocation } from 'react-router-dom';
 
 
-  const ScenarioPage = ({ level }) => {
+  const ScenarioPage = () => {
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { level } = location.state || {};
 
+    useEffect(()=>{
+      if(!doesUserExistInLocalStorage()){
+        navigate('/login');
+      }
+      setUser(getUserFromLocalStorage());
+    },[])
 
- let user = {
-  id : 1,
-  level: 1,
-  //to do
- }
 
   
   let data = level.problem.split("\n");
   const [tip, setTip] = useState(null);
   const [answer, setAnswer] = useState("");
   const [passed, setPassed] = useState(false);
-
-  useEffect(()=>{
-    //to do
-  }, []);
 
 
   const handleChange = (e) => {
@@ -63,6 +73,7 @@ import axios from 'axios';
               "Content-Type": "application/json",
             },
           });
+          updateUserInLocalStorage({level : user.level + 1});
       }
 
         setPassed(true);
@@ -88,7 +99,12 @@ import axios from 'axios';
               <img src={Logo} alt="ProAct Logo" className="h-10 mr-2" />
               <span className="text-2xl font-bold">ProAct</span>
             </div>
-            <button className="p-2 rounded-full hover:bg-[#0a6bcc]">
+            <button className="p-2 rounded-full hover:bg-[#0a6bcc]"
+            onClick={()=>{
+                    deleteUserFromLocalStorage();
+                    navigate('/login');
+                  }}
+            >
               <IoMdExit className="text-3xl" />
             </button>
           </div>

@@ -1,19 +1,30 @@
-import { useState } from 'react';
+import {useEffect, useState } from 'react';
 import axios from 'axios';
 import portfeuille from '../images/Other 03.png';
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-
-
+import {
+  saveUserToLocalStorage,
+  deleteUserFromLocalStorage,
+  getUserFromLocalStorage,
+  doesUserExistInLocalStorage,
+  updateUserInLocalStorage,
+} from '../utils/localStorageUtils';
 
 
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+    useEffect(()=>{
+      if(doesUserExistInLocalStorage()){
+        navigate('/road');
+      }
+    },[])
+  
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
   });
   const [error, setError] = useState('');
-  const navigate = useNavigate();
 
   const handleRegisterClick = () => {
     navigate("/register");
@@ -45,6 +56,7 @@ const LoginPage = () => {
       setSuccess(true); // Indicate success
 
       if (response.data.valid) {
+        saveUserToLocalStorage(response.data.user);
         navigate("/road"); // Redirect to "/road"
       } else {
         setError("Invalid login credentials.");

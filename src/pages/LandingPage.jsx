@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PersonLaptop from '../images/hero-person.png';
 import Logo from '../images/logo.png';
+import {
+  saveUserToLocalStorage,
+  deleteUserFromLocalStorage,
+  getUserFromLocalStorage,
+  doesUserExistInLocalStorage,
+  updateUserInLocalStorage,
+} from '../utils/localStorageUtils';
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  useEffect(()=>{
+    if(doesUserExistInLocalStorage()){
+      navigate('/road');
+    }
+  },[])
+  
 
   return (
     <div className="min-h-screen bg-white">

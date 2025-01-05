@@ -2,11 +2,8 @@ export const saveUserToLocalStorage = (user) => {
     localStorage.setItem('user', JSON.stringify(user));
   };
   
-  export const deleteUserFromLocalStorage = (userId) => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user && user.id === userId) {
+  export const deleteUserFromLocalStorage = () => {
       localStorage.removeItem('user');
-    }
   };
 
   export const getUserFromLocalStorage = () => {

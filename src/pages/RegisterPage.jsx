@@ -1,8 +1,23 @@
-import { useState } from 'react';
+import {useEffect, useState } from 'react';
 import axios from 'axios';
 import LaptopImage from '../images/Other 07reg.png';
+import { useNavigate } from "react-router-dom";
+import {
+  saveUserToLocalStorage,
+  deleteUserFromLocalStorage,
+  getUserFromLocalStorage,
+  doesUserExistInLocalStorage,
+  updateUserInLocalStorage,
+} from '../utils/localStorageUtils';
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+    useEffect(()=>{
+      if(doesUserExistInLocalStorage()){
+        navigate('/road');
+      }
+    },[])
+
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -229,7 +244,11 @@ const RegisterPage = () => {
 
               <div className="mt-4">
                 Yes I have an account?{' '}
-                <a href="#" className="text-[#006ee0] font-medium">
+                <a className="text-[#006ee0] font-medium"
+                style={{cursor: "pointer"}}
+                onClick={()=>{
+                  navigate('/login');
+                }}>
                   Login
                 </a>
               </div>

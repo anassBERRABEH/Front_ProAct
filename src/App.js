@@ -21,7 +21,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/scenario" element={<ScenarioPage level={myVariable} />} />
+        <Route path="/scenario" element={<ScenarioPage />} />
         <Route path="/road" element={<RoadPage />} />
       </Routes>
     </Router>
